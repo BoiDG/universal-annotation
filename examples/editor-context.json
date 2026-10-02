@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "type": "capture",
+  "application": "Cursor",
+  "window": "validation.py",
+  "workspace": "C:/projects/agent",
+  "file_path": "C:/projects/agent/validation.py",
+  "start_line": 12,
+  "end_line": 13,
+  "language": "python",
+  "text": "def validate_prompt(text: str) -> bool:\n    return bool(text)\n"
+}

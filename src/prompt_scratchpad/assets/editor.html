@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' qrc:; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src file:; connect-src 'none';">
+<link rel="stylesheet" href="editor.css">
+<title>Markdown composer</title>
+</head>
+<body>
+<nav class="toolbar" aria-label="Markdown formatting">
+  <div class="tools">
+    <button data-command="paragraph" title="Paragraph">¶</button>
+    <button data-command="h1" title="Heading 1">H₁</button>
+    <button data-command="h2" title="Heading 2">H₂</button>
+    <button data-command="h3" title="Heading 3">H₃</button>
+    <i></i>
+    <button data-command="bold" title="Bold · Ctrl+B"><b>B</b></button>
+    <button data-command="italic" title="Italic · Ctrl+I"><em>I</em></button>
+    <button data-command="strike" title="Strikethrough"><s>S</s></button>
+    <i></i>
+    <button data-command="bullet" title="Bullet list">☷</button>
+    <button data-command="ordered" title="Numbered list">1.</button>
+    <button data-command="task" title="Task list">☑</button>
+    <button data-command="quote" title="Quote">❞</button>
+    <button data-command="code" title="Code block">{ }</button>
+    <button data-command="link" title="Link">↗</button>
+    <button id="image" title="Attach an image or paste a screenshot (Ctrl+V)">▧ Image</button>
+  </div>
+  <button id="source" title="Switch between formatted editing and Markdown source" aria-pressed="false">&lt;/&gt; Source</button>
+</nav>
+<main id="editor" aria-label="Prompt Markdown editor"></main>
+<div id="blocks" role="menu" aria-label="Insert Markdown block" hidden>
+  <span class="menu-caption">INSERT BLOCK</span>
+  <button data-command="h1"><strong>H₁</strong> Heading 1</button>
+  <button data-command="h2"><strong>H₂</strong> Heading 2</button>
+  <button data-command="h3"><strong>H₃</strong> Heading 3</button>
+  <button data-command="bullet"><strong>☷</strong> Bullet list</button>
+  <button data-command="task"><strong>☑</strong> Task list</button>
+  <button data-command="code"><strong>{ }</strong> Code block</button>
+  <button data-command="quote"><strong>❞</strong> Quote</button>
+</div>
+<script src="qrc:///qtwebchannel/qwebchannel.js"></script>
+<script src="editor.bundle.js"></script>
+</body>
+</html>

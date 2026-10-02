@@ -1,0 +1,25 @@
+{
+  "name": "prompt-scratchpad-bridge",
+  "displayName": "Prompt Scratchpad Bridge",
+  "description": "Sends only the active editor file and selected line range to the local Prompt Scratchpad app.",
+  "version": "0.1.0",
+  "publisher": "prompt-scratchpad-local",
+  "private": true,
+  "engines": {"vscode": "^1.90.0"},
+  "main": "./out/extension.js",
+  "extensionKind": ["ui"],
+  "activationEvents": ["onStartupFinished"],
+  "contributes": {
+    "commands": [{"command": "promptScratchpad.refreshLocation", "title": "Prompt Scratchpad: Refresh Editor Location"}]
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "package": "npm run build && vsce package --no-dependencies --out prompt-scratchpad-bridge.vsix"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.90.0",
+    "@vscode/vsce": "^3.0.0",
+    "typescript": "^5.0.0"
+  }
+}
