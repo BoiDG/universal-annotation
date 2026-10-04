@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="src/prompt_scratchpad/assets/logo.png" alt="Universal Annotation app icon" width="112" height="112">
+</p>
+
 # Prompt Scratchpad
 
 A small Windows desktop Markdown composer for AI coding prompts. Select text in another app, capture it at the scratchpad caret, add instructions, and copy the complete prompt into Herdr, Orca, Codex, or any other agent.
@@ -12,6 +16,14 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\Setup.ps1
 ```
 
 The setup creates a local `.venv` and installs PySide6, pywin32, comtypes, pynput, and pyperclip. Launch opens the desktop window without a persistent terminal window. A second launch shows the existing scratchpad. Nothing starts automatically at Windows login. Windows' native `RegisterHotKey` owns the app's global shortcuts; pynput is used by the live fixture tests.
+
+Create **Universal Annotation** shortcuts on your desktop and in the Start menu:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\Create-Shortcuts.ps1
+```
+
+The shortcuts use the app icon and launch `.venv\Scripts\pythonw.exe` directly, without a terminal window. Keep this folder in place; rerun the script if you move it.
 
 For a console with diagnostics:
 
