@@ -10,6 +10,8 @@ from PySide6.QtWebEngineCore import QWebEnginePage, QWebEngineProfile, QWebEngin
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtWidgets import QVBoxLayout, QWidget
 
+from .attachments import AttachmentPreviews
+
 
 def utf16_size(text: str) -> int:
     return len(text.encode("utf-16-le")) // 2
@@ -78,6 +80,11 @@ class ComposerBridge(QObject):
     def attachClipboardImage(self):
         self.composer.clipboard_image_requested.emit()
 
+    @Slot(str, result=str)
+    def imagePreview(self, path):
+        preview = self.composer.previews.path_for(path)
+        return QUrl.fromLocalFile(str(preview)).toString() if preview else ""
+
 
 class MarkdownComposer(QWidget):
     copy_requested = Signal()
@@ -90,6 +97,7 @@ class MarkdownComposer(QWidget):
     def __init__(self, source, attachment_directory, parent=None):
         super().__init__(parent)
         self.source = source
+        self.previews = AttachmentPreviews(attachment_directory)
         self.ready = False
         self.applying = False
         self.revision = 0

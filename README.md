@@ -171,3 +171,7 @@ npm run build
 The packaged component loads local assets only, blocks remote navigation and requests, and uses an off-the-record WebEngine profile. It never loads CDN scripts or sends prompt text over the network.
 
 To reduce background RAM, the formatted editor releases its Chromium renderer after the window has been hidden in the tray for 30 seconds. Reopening reloads the local editor and restores the document, selection, undo/redo history, editing mode, and scroll position. Captures and Copy Prompt continue to use the canonical Qt document. The visible editor still needs Chromium's normal memory footprint.
+
+Large static attachments use cached display previews capped at 1240 × 680 pixels, twice the editor's maximum display size. Original files and Markdown references remain unchanged. Small images and animated images use the originals. Previews live in `attachments/.previews` and can be deleted while the app is closed; they will be regenerated. A decoder may temporarily allocate the full image when creating its first preview, so this limits retained display memory rather than guaranteeing a peak allocation limit.
+
+The reproducible process-tree measurement and native-editor migration findings are in [docs/memory-investigation.md](docs/memory-investigation.md).

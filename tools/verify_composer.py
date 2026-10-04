@@ -109,7 +109,7 @@ with tempfile.TemporaryDirectory() as directory:
         copy.assert_called_once_with(window.editor.toPlainText())
     # An attached image remains a Markdown path in the canonical document but
     # loads as a visible preview while editing.
-    sample = QImage(10, 6, QImage.Format.Format_ARGB32)
+    sample = QImage(2000, 1200, QImage.Format.Format_ARGB32)
     sample.fill(0xff22aa66)
     source = Path(directory) / "sample.png"
     assert sample.save(str(source))
@@ -120,6 +120,8 @@ with tempfile.TemporaryDirectory() as directory:
     pump(0.4)
     assert f"![sample](<{attached.as_posix()}>)" in window.editor.toPlainText()
     assert javascript(window, "Boolean(document.querySelector('.attached-image img')?.complete && document.querySelector('.attached-image img')?.naturalWidth)")
+    assert javascript(window, "document.querySelector('.attached-image img').naturalWidth <= 1240 && document.querySelector('.attached-image img').naturalHeight <= 680")
+    assert QImage(str(attached)).size() == sample.size(), "Preview resizing changed the original image"
     # Release the actual renderer in the tray, then restore editable state and
     # undo/redo history. Use a short idle interval only for this fixture.
     from PySide6.QtWebEngineCore import QWebEnginePage

@@ -20,7 +20,10 @@ class ImagePreview extends WidgetType {
   toDOM() {
     const figure=document.createElement('figure'), img=document.createElement('img'), caption=document.createElement('figcaption');
     figure.className='attached-image';
-    img.src='file:///'+this.path.split('/').map((part,index)=>index===0?part:encodeURIComponent(part)).join('/');
+    // Only the display asset is resized. The editor document, original image,
+    // copy payload, and undo history continue to contain the original path.
+    if(bridge) bridge.imagePreview(this.path,url=>{if(url) img.src=url;});
+    else img.src='file:///'+this.path.split('/').map((part,index)=>index===0?part:encodeURIComponent(part)).join('/');
     img.alt=this.caption;
     caption.textContent=this.caption;
     figure.append(img,caption);
